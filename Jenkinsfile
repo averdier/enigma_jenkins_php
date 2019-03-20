@@ -1,8 +1,8 @@
 pipeline {
     agent none
     stages {
-        agent any
         stage('Cloning Git') {
+            agent any
             steps {
                 git 'https://github.com/gustavoapolinario/node-todo-frontend'
             }
