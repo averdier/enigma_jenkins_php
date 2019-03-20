@@ -9,6 +9,6 @@ job('Test PWD Groovy job') {
         scm('H/5 * * * *')
     }
     steps {
-        shell('ls "$(PWD)"')
+        shell('ls')
     }
 }
