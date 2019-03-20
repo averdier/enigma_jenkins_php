@@ -9,6 +9,10 @@ job('Test PWD Groovy job') {
         scm('H/5 * * * *')
     }
     steps {
-        shell('ls')
+        shell("docker container create --name dummygroovy -v tempvolumegroovy:/app hello-world")
+        shell('docker cp "$(pwd)/." dummygroovy:/app')
+        shell("docker rm dummygroovy")
+        shell("docker run -v tempvolumegroovy:/app --rm phpunit/phpunit:latest --bootstrap ExempleClass.php ExempleTest.php")
+        shell("docker volume rm tempvolumegroovy")
     }
 }
