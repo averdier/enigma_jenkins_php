@@ -1,0 +1,18 @@
+job('Test PHP Groovy job') {
+    scm {
+        git('https://github.com/averdier/enigma_jenkins_php') {  node -> 
+            node / gitConfigName('rastadev')
+            node / gitConfigEmail('arthur@elonet.fr')
+        }
+    }
+    triggers {
+        scm('H/5 * * * *')
+    }
+    steps {
+        shell("docker container create --name dummy -v tempvolumegroovy:/app hello-world")
+        shell("docker cp '${PWD}/.' dummy:/app")
+        shell("docker rm dummy")
+        shell("docker run -v tempvolumegroovy:/app --rm phpunit/phpunit:latest --bootstrap ExempleClass.php ExempleTest.php")
+        shell("docker volume rm tempvolumegroovy")
+    }
+}
