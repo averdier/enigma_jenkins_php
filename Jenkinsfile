@@ -10,7 +10,7 @@ pipeline {
         stage('Test') {
             agent { docker {
                 label 'phpunit/phpunit:latest'
-                args '--entrypoint='''
+                args '--entrypoint=""'
             }
             steps {
                 sh 'phpunit --bootstrap ExempleClass.php ExempleTest.php'
