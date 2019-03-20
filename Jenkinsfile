@@ -4,7 +4,7 @@ pipeline {
         stage('Cloning Git') {
             agent any
             steps {
-                git 'https://github.com/gustavoapolinario/node-todo-frontend'
+                git 'https://github.com/averdier/enigma_jenkins_php'
             }
         }
         stage('Test') {
